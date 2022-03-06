@@ -1,0 +1,29 @@
+header {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.welcome {
+  text-align: center;
+  color: #fff;
+  line-height: 3em;
+  margin-bottom: 98px;
+}
+
+.mlSecondary {
+  color: #f8af5e;
+}
+
+.mlHeader {
+  padding: 35px;
+  .eua {
+    margin-top: 30px;
+  }
+}
+
+.mlLevels {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
