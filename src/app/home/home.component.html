@@ -21,22 +21,12 @@
   </article>
   <section class="mlLevels">
     <ml-card-level
-      lvl="Básico"
-      lvlName="Noviço"
-      lvlDescription="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-      lvlImg="../../assets/img/card/mlBasiclvl.png"
-    ></ml-card-level>
-    <ml-card-level
-      lvl="Básico"
-      lvlName="Noviço"
-      lvlDescription="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-      lvlImg="../../assets/img/card/mlBasiclvl.png"
-    ></ml-card-level>
-    <ml-card-level
-      lvl="Básico"
-      lvlName="Noviço"
-      lvlDescription="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-      lvlImg="../../assets/img/card/mlBasiclvl.png"
+      *ngFor="let lvl of cardLevellist"
+      [lvl]="lvl.level"
+      [lvlName]="lvl.levelName"
+      [lvlDescription]="lvl.levelDescription"
+      [lvlImg]="lvl.levelImg"
+      [lvlColor]="lvl.levelColor"
     ></ml-card-level>
   </section>
 </main>

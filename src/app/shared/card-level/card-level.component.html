@@ -2,7 +2,7 @@
   <figure>
     <img [src]="lvlImg" alt="Nível Básico" />
   </figure>
-  <div class="mlLevelName">
+  <div class="mlLevelName" [ngStyle]="{ background: lvlColor }">
     <span>{{ lvl }}</span>
   </div>
   <h1>Nv.{{ lvlName }}</h1>

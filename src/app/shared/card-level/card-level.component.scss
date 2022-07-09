@@ -9,7 +9,9 @@
   align-items: center;
   text-align: center;
   padding: 40px;
-  margin: 0px 35px;
+  margin: 35px;
+  transition: transform .2s;
+  cursor: pointer;
 
   .mlLevelName {
     width: 164px;
@@ -26,4 +28,14 @@
     margin: 12px;
     font-size: 1.4em;
   }
+}
+.mlCard.disabled {
+  .mlLevelName, figure, h1, p{
+    opacity: 40%;
+  }
+}
+
+.mlCard:hover {
+  transform: scale(1.1);
+  opacity: 40%;
 }

@@ -1,13 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 * {
   font-family: "Roboto", sans-serif;
+  
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
-body {
+
+body, html {
   background-color: #132858;
   -webkit-font-smoothing: antialiased;
+  width: 100%;
+  
 }
 h1 {
   font-size: 2.5em;
