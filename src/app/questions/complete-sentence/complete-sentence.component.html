@@ -1,17 +1,7 @@
-<header>
-  <figure>
-    <img
-      width="40"
-      src="../../assets/img/monk_logoIn.svg"
-      alt="MonkLang Logo"
-    />
-  </figure>
-  <article>
-    <h1>Complete this sentence</h1>
-    <h2>Choose two words to complete this sentence</h2>
-  </article>
-  <figure>x</figure>
-</header>
+<ml-header-question
+  title="Complete this sentence"
+  description="Choose two words to complete this sentence"
+></ml-header-question>
 <main class="main-question">
   <div class="progress-bar">
     <div class="completed"></div>
@@ -33,4 +23,11 @@
     <li>the</li>
     <li class="selected">living</li>
   </ul>
+
+  <section class="question-action">
+    <button>
+      Check It
+      <fa-icon [icon]="faCheck"></fa-icon>
+    </button>
+  </section>
 </main>
