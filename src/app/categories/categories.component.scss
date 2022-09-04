@@ -1,25 +1,129 @@
 .categories-content {
   display: flex;
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 170px);
   flex-wrap: wrap;
   .welcome-text {
-    width: 50%;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 20px;
     article {
-      max-width: 400px;
-      text-align: center;
+      width: 400px;
+      text-align: justify;
+      figure {
+        text-align: center;
+      }
+      h1 {
+        font-size: 3em;
+      }
     }
   }
   .categories {
-    width: 50%;
+    flex: 1;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    span {
+      flex: 1;
+    }
+    ul {
+      display: grid;
+      grid-template-columns: 280px 280px;
+      grid-gap: 30px;
+      max-height: 530px;
+      li {
+        max-width: 280px;
+        height: 250px;
+        border-radius: 10px;
+        border: 10px solid #103180;
+      }
+    }
+    .category-item {
+      max-width: 200px;
+      height: 180px;
+      border-radius: 10px;
+      border: 10px solid #103180;
+    }
+  }
+  @media (max-width: 636px) {
+    .categories ul {
+      grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+      margin-bottom: 180px;
+      max-height: none;
+    }
+  }
+
+  @media (max-width: 1069px) {
+    .categories {
+      min-height: calc(100vh - 170px) !important;
+      margin-bottom: 100px;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .welcome-text article {
+      width: 286px;
+      text-align: center;
+      h1 {
+        font-size: 1.5em;
+      }
+      p {
+        font-size: 1.2em;
+      }
+    }
+
+    .btn-action {
+      width: 200px;
+      height: 50px;
+    }
   }
 }
 
+@media (max-width: 1069px) {
+  footer {
+    position: fixed !important;
+    bottom: 0 !important;
+  }
+}
+
+.btn-action {
+  width: 280px;
+  height: 71px;
+  left: 197px;
+  top: 876px;
+  border-radius: 50px;
+  border: none;
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.btn-action.btn-next {
+  background: #059413;
+}
+.btn-action.btn-back {
+  background: #103180;
+}
 footer {
   width: 100%;
-  height: 140px;
+  height: 170px;
   background-color: #ddd;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  footer {
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .btn-action {
+    width: 200px;
+    height: 50px;
+    margin: 10px;
+  }
 }
