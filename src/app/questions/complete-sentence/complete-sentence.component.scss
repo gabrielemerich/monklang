@@ -1,4 +1,5 @@
 /*Header component*/
+
 header {
   display: flex;
   justify-content: space-between;
@@ -42,7 +43,7 @@ header {
   margin-bottom: 48px;
   max-width: 850px;
   .completed {
-    background-color: #103180;
+    background-color: #f8af5e;
     width: 50%;
   }
 }
@@ -55,7 +56,7 @@ header {
   max-width: 850px;
   margin: 0 auto;
   .question-phrase {
-    background: rgba(248, 175, 94, 0.2);
+    background: #fff;
     padding: 20px;
     width: 80%;
     text-align: center;

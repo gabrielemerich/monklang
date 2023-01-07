@@ -8,12 +8,12 @@ header {
   text-align: center;
   color: #fff;
   line-height: 3em;
+  padding: 20px;
 }
 
 .mlSecondary {
   color: #f8af5e;
 }
-
 .mlHeader {
   padding: 35px;
   .eua {
@@ -27,6 +27,7 @@ header {
   flex-wrap: wrap;
   padding: 30px;
 }
-.invertColor{
+.invertColor {
   margin-top: 6px;
+  cursor: pointer;
 }

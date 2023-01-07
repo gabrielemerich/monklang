@@ -9,12 +9,59 @@
   list-style: none;
 }
 
+body.lightTheme {
+  --bkg-color: #fff;
+  header {
+    .mlCloseIt {
+      color: #132858 !important;
+    }
+
+    .mlCloseIt:hover {
+      color: rgb(80, 79, 79) !important;
+    }
+    color: unset;
+    .sentence-title figure {
+      content: url(../src/assets/img/monk_logoIn.svg);
+    }
+  }
+
+  .question-phrase {
+    background: rgba(248, 175, 94, 0.3) !important;
+  }
+  .completed {
+    background-color: #132858 !important;
+  }
+  .mlCard {
+    background-color: none;
+    border: 5px solid #132858;
+  }
+  .welcome {
+    color: #132858;
+  }
+  .logo {
+    content: url(../src/assets/img/monk_logoIn.svg);
+    width: 50px;
+    height: 50px;
+  }
+  .invertColor {
+    content: url(../src/assets/img/invert_iconIn.svg);
+    width: 40px;
+    height: 40px;
+  }
+}
+
+body {
+  --bkg-color: #132858;
+}
+
 body,
 html {
-  background-color: #fff;
+  background-color: var(--bkg-color);
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   width: 100%;
 }
+
 h1 {
   font-size: 2.5em;
 }

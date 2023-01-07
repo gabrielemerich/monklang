@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CardLevel } from '../shared/card-level/card-level';
 
 @Component({
@@ -38,5 +39,9 @@ export class HomeComponent implements OnInit {
         levelImg: './../assets/img/card/mlOsholvl.svg',
       },
     ];
+  }
+
+  invertColorTheme() {
+    document.body.classList.toggle('lightTheme');
   }
 }

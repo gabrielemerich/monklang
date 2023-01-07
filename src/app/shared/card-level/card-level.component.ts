@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ml-card-level',
@@ -12,7 +13,11 @@ export class CardLevelComponent implements OnInit {
   @Input() lvlDescription: string;
   @Input() lvlColor: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  navigateQuestion() {
+    this.router.navigate(['/complete-sentence']);
+  }
 }

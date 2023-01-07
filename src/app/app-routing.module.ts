@@ -4,7 +4,10 @@ import { CategoriesComponent } from './categories/categories.component';
 import { HomeComponent } from './home/home.component';
 import { CompleteSentenceComponent } from './questions/complete-sentence/complete-sentence.component';
 
-const routes: Routes = [{ component: CategoriesComponent, path: '' }];
+const routes: Routes = [
+  { component: HomeComponent, path: '' },
+  { component: CompleteSentenceComponent, path: 'complete-sentence' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
