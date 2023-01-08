@@ -12,5 +12,7 @@
       <h2>{{ description }}</h2>
     </article>
   </div>
-  <figure class="mlCloseIt"><fa-icon [icon]="faDoorOpen"></fa-icon></figure>
+  <figure (click)="gohome()" class="mlCloseIt">
+    <fa-icon [icon]="faDoorOpen"></fa-icon>
+  </figure>
 </header>

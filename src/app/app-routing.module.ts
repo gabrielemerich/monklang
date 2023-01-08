@@ -6,7 +6,18 @@ import { CompleteSentenceComponent } from './questions/complete-sentence/complet
 
 const routes: Routes = [
   { component: HomeComponent, path: '' },
-  { component: CompleteSentenceComponent, path: 'complete-sentence' },
+  {
+    path: 'questions',
+    loadChildren: () =>
+      import('./questions/questions.module').then(
+        (module) => module.QuestionsModule
+      ),
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

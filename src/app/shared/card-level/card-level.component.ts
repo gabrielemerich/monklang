@@ -18,6 +18,6 @@ export class CardLevelComponent implements OnInit {
   ngOnInit(): void {}
 
   navigateQuestion() {
-    this.router.navigate(['/complete-sentence']);
+    this.router.navigate(['/questions']);
   }
 }

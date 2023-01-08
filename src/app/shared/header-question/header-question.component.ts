@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'ml-header-question',
@@ -10,7 +11,11 @@ export class HeaderQuestionComponent implements OnInit {
   @Input() description: string;
   faDoorOpen = faDoorOpen;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  gohome() {
+    this.router.navigate(['']);
+  }
 }
