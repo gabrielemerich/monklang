@@ -8,7 +8,7 @@
   </div>
   <router-outlet></router-outlet>
   <section class="question-action">
-    <button>
+    <button (click)="checkAnswers()">
       Check It
       <fa-icon [icon]="faCheck"></fa-icon>
     </button>

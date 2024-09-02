@@ -1,16 +1,16 @@
 <section class="question-phrase">
   <p>
-    <span style="color: #f8af5e">Un</span> garcon
-    <span style="color: #f8af5e">et</span> un chat
+    <span style="color: #f8af5e">?</span> garcon
+    <span style="color: #f8af5e">?</span> un chat
   </p>
 </section>
 
 <ul class="question-options">
-  <li class="selected">breakfast</li>
-  <li>watercooler</li>
-  <li>progressbar</li>
-  <li>fitfood</li>
-  <li>everyday</li>
-  <li>the</li>
-  <li class="selected">living</li>
+  <li
+    *ngFor="let answer of questionViewModel.answers"
+    [class.selected]="answer.selected"
+    (click)="toggleSelection(answer)"
+  >
+    {{ answer.description }}
+  </li>
 </ul>
