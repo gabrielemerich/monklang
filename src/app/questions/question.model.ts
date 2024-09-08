@@ -2,7 +2,7 @@ export interface Question {
   statement: string;
   title: string;
   levelId: number;
-  answers: Answers[];
+  answers: Answer[];
   type: QuestionType;
 }
 
@@ -10,12 +10,12 @@ export interface QuestionViewModel extends Question {
   answers: AnswerViewModel[];
 }
 
-export interface Answers {
+export interface Answer {
   itsCorrect: boolean;
   description: string;
 }
 
-export interface AnswerViewModel extends Answers {
+export interface AnswerViewModel extends Answer {
   selected: boolean;
 }
 

@@ -14,7 +14,9 @@ export class QuestionsService {
   checkAnswersAction$ = this.actionSubject.asObservable();
 
   getByTypeId(typeId: string) {
-    return this.http.get<Question[]>(`${configApiUrl}questions/${typeId}`);
+    return this.http.get<Question[]>(
+      `${configApiUrl}questions/Types/${typeId}`
+    );
   }
 
   getTypes() {

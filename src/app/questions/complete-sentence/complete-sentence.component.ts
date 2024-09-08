@@ -4,8 +4,8 @@ import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { QuestionsService } from '../questions.service';
 import { Subscription } from 'rxjs';
 import {
+  Answer,
   AnswerViewModel,
-  Answers,
   Question,
   QuestionViewModel,
 } from '../question.model';
@@ -18,6 +18,7 @@ import {
 export class CompleteSentenceComponent implements OnInit {
   faCheck = faCheckCircle;
   faExit = faDoorOpen;
+  indexCurrentQuestion: number = 0;
   questions: Question[] = [];
   questionViewModel: QuestionViewModel;
   selectedAnswers = [];
@@ -38,7 +39,19 @@ export class CompleteSentenceComponent implements OnInit {
     console.log(this.questionViewModel);
   }
 
-  mappingAnswers(answers: Answers[]): AnswerViewModel[] {
+  nextQuestion() {
+    if (this.indexCurrentQuestion < this.questions.length - 1) {
+      this.questionViewModel = {
+        ...this.questions[this.indexCurrentQuestion + 1],
+        answers: this.mappingAnswers(
+          this.questions[this.indexCurrentQuestion + 1].answers
+        ),
+      };
+      this.indexCurrentQuestion++;
+    }
+  }
+
+  mappingAnswers(answers: Answer[]): AnswerViewModel[] {
     return answers.map((answer) => ({
       ...answer,
       selected: false,
@@ -47,7 +60,7 @@ export class CompleteSentenceComponent implements OnInit {
   ngOnInit(): void {
     this.checkAnswersAction =
       this.questionService.checkAnswersAction$.subscribe(() => {
-        console.log('check answers');
+        this.nextQuestion();
       });
   }
 
@@ -55,11 +68,32 @@ export class CompleteSentenceComponent implements OnInit {
     const selectedOptions = this.questionViewModel.answers.filter(
       (answerViewModel: AnswerViewModel) => answerViewModel.selected
     );
+    const correctAnswers = this.questionViewModel.answers.filter(
+      (answerViewModel: AnswerViewModel) => answerViewModel.itsCorrect
+    );
+
     if (answerViewModel.selected) {
       answerViewModel.selected = false;
-    } else if (selectedOptions.length < 2) {
+      this.removeAnswerAtStatement(
+        this.questionViewModel.statement,
+        answerViewModel.description
+      );
+    } else if (selectedOptions.length < correctAnswers.length) {
       answerViewModel.selected = true;
+      this.replaceStatementWithAnswer(
+        this.questionViewModel.statement,
+        answerViewModel.description
+      );
     }
+  }
+
+  replaceStatementWithAnswer(statement: string, answer: string) {
+    let statementReplace = statement.replace('?', answer);
+    this.questionViewModel.statement = statementReplace;
+  }
+  removeAnswerAtStatement(statement: string, answer: string) {
+    let statementReplace = statement.replace(answer, '?');
+    this.questionViewModel.statement = statementReplace;
   }
 
   ngOnDestroy(): void {
