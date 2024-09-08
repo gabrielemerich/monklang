@@ -1,5 +1,5 @@
 <section class="question-phrase">
-  <p>
+  <p [innerHTML]="questionViewModel.statement | highlightAnswers">
     <!-- <span style="color: #f8af5e">?</span> garcon
     <span style="color: #f8af5e">?</span> un chat -->
     {{ questionViewModel.statement }}

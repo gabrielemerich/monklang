@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { QuestionsService } from '../questions.service';
@@ -16,13 +16,18 @@ import {
   styleUrls: ['./complete-sentence.component.scss'],
 })
 export class CompleteSentenceComponent implements OnInit {
+  @Output() progress: EventEmitter<{
+    totalQuestions: number;
+    answered: number;
+  }> = new EventEmitter<{ totalQuestions: number; answered: number }>();
+  private checkAnswersAction: Subscription;
+  answers: number = 0;
   faCheck = faCheckCircle;
   faExit = faDoorOpen;
   indexCurrentQuestion: number = 0;
   questions: Question[] = [];
   questionViewModel: QuestionViewModel;
   selectedAnswers = [];
-  private checkAnswersAction: Subscription;
 
   constructor(
     private activatedRouter: Router,
@@ -48,6 +53,10 @@ export class CompleteSentenceComponent implements OnInit {
         ),
       };
       this.indexCurrentQuestion++;
+    }
+    if (this.answers != this.questions.length) {
+      this.answers++;
+      this.questionService.changeProgress(this.questions.length, this.answers);
     }
   }
 

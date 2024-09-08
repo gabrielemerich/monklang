@@ -4,6 +4,7 @@ import { CompleteSentenceComponent } from './complete-sentence/complete-sentence
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { QuestionsComponent } from './questions.component';
+import { HighlightAnswerPipe } from '../shared/pipes/highlight-answers.pipe';
 
 const routes: Routes = [
   {
@@ -15,7 +16,11 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [CompleteSentenceComponent, QuestionsComponent],
+  declarations: [
+    CompleteSentenceComponent,
+    QuestionsComponent,
+    HighlightAnswerPipe,
+  ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })
 export class QuestionsModule {}

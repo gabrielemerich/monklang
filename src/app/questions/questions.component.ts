@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { Question, QuestionType } from './question.model';
@@ -12,6 +12,8 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./questions.component.scss'],
 })
 export class QuestionsComponent implements OnInit {
+  @Input() progressBarPercent: string = '5%';
+
   faCheck = faCheckCircle;
   faExit = faDoorOpen;
 
@@ -44,6 +46,19 @@ export class QuestionsComponent implements OnInit {
           });
         }
       });
+
+    this.questionsService.changeProgressAction$.subscribe(
+      ([totalQuestions, answered]) => {
+        if (totalQuestions && answered)
+          this.changeProgress(totalQuestions, answered);
+      }
+    );
+  }
+
+  changeProgress(totalQuestions: number, answered: number) {
+    let progress = (answered / totalQuestions) * 100;
+    console.log(progress);
+    this.progressBarPercent = `${progress.toPrecision(1)}%`;
   }
 
   checkAnswers() {

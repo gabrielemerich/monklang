@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Question, QuestionType } from './question.model';
 import { configApiUrl } from '../config/api.config';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,12 @@ import { Subject } from 'rxjs';
 export class QuestionsService {
   constructor(private http: HttpClient) {}
 
-  private actionSubject = new Subject<void>();
-  checkAnswersAction$ = this.actionSubject.asObservable();
+  private checkAnswersSubject = new Subject<void>();
+  private changeProgressSubject = new BehaviorSubject<[number, number]>([0, 0]);
+
+  checkAnswersAction$ = this.checkAnswersSubject.asObservable();
+  changeProgressAction$: Observable<[number, number]> =
+    this.changeProgressSubject.asObservable();
 
   getByTypeId(typeId: string) {
     return this.http.get<Question[]>(
@@ -24,6 +28,10 @@ export class QuestionsService {
   }
 
   checkAnswers() {
-    this.actionSubject.next();
+    this.checkAnswersSubject.next();
+  }
+
+  changeProgress(totalQuestions: number, answered: number) {
+    this.changeProgressSubject.next([totalQuestions, answered]);
   }
 }

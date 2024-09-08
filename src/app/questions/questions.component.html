@@ -4,7 +4,7 @@
 ></ml-header-question>
 <main class="main-question">
   <div class="progress-bar">
-    <div class="completed"></div>
+    <div [ngStyle]="{ width: progressBarPercent }" class="completed"></div>
   </div>
   <router-outlet></router-outlet>
   <section class="question-action">
