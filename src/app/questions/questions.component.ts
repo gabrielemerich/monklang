@@ -50,10 +50,6 @@ export class QuestionsComponent implements OnInit {
     this.questionsService.checkAnswers();
   }
 
-  replaceStatementWithAnswer(statement: string, answer: string) {
-    statement.replace('?', answer);
-  }
-
   private getRandomType(types: QuestionType[]): QuestionType | undefined {
     const randomIndex = Math.floor(Math.random() * types.length);
     return types[randomIndex];
