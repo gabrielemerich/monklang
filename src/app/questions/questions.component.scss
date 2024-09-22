@@ -1,16 +1,17 @@
-.progress-bar,
-.completed {
+.progress-bar {
   background-color: #f4f4f4;
   width: 100%;
   height: 30px;
   border-radius: 20px;
   margin-bottom: 48px;
   max-width: 850px;
-  .completed {
-    background-color: #f8af5e;
-    width: 50%;
-    transition: width 1s ease-in-out;
-  }
+}
+
+.progress-bar .completed {
+  height: 30px;
+  border-radius: 20px;
+  background-color: #f8af5e;
+  transition: width 1s ease-in-out;
 }
 .main-question {
   padding: 20px;

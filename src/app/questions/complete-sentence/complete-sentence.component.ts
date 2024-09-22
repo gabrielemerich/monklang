@@ -26,22 +26,30 @@ export class CompleteSentenceComponent implements OnInit {
   faExit = faDoorOpen;
   indexCurrentQuestion: number = 0;
   questions: Question[] = [];
-  questionViewModel: QuestionViewModel;
+  questionViewModel: QuestionViewModel = {
+    answers: [],
+    statement: '',
+    title: '',
+    levelId: 0,
+    type: { id: '', name: '' },
+  };
   selectedAnswers = [];
+  loading: boolean = true;
 
   constructor(
     private activatedRouter: Router,
     private questionService: QuestionsService
   ) {
-    this.questions = this.activatedRouter.getCurrentNavigation()?.extras
-      .state as Question[];
-
-    this.questionViewModel = {
-      ...this.questions[0],
-      answers: this.mappingAnswers(this.questions[0].answers),
-    };
-
-    console.log(this.questionViewModel);
+    this.questionService.questionsAction$.subscribe((questions) => {
+      if (questions.length > 0) {
+        this.questions = questions;
+        this.loading = false;
+        this.questionViewModel = {
+          ...this.questions[0],
+          answers: this.mappingAnswers(this.questions[0].answers),
+        };
+      }
+    });
   }
 
   nextQuestion() {

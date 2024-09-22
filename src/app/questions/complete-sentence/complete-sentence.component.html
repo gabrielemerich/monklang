@@ -1,13 +1,18 @@
-<section class="question-phrase">
-  <p [innerHTML]="questionViewModel.statement | highlightAnswers">
-    <!-- <span style="color: #f8af5e">?</span> garcon
-    <span style="color: #f8af5e">?</span> un chat -->
+<section [ngClass]="loading ? 'shimmer' : 'bgQuestion'" class="question-phrase">
+  <p
+    [hidden]="loading"
+    [innerHTML]="questionViewModel.statement | highlightAnswers"
+  >
     {{ questionViewModel.statement }}
   </p>
 </section>
 
-<ul class="question-options">
+<ul
+  [ngClass]="loading ? 'shimmer' : 'bgOption'"
+  class="shimmer question-options"
+>
   <li
+    [hidden]="loading"
     *ngFor="let answer of questionViewModel.answers"
     [class.selected]="answer.selected"
     (click)="toggleSelection(answer)"

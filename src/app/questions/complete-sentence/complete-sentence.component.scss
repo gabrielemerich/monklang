@@ -1,5 +1,4 @@
 .question-phrase {
-  background: #fff;
   margin: 0 auto;
   padding: 20px;
   width: 80%;
@@ -16,11 +15,18 @@
     text-underline-offset: 8px;
   }
 }
+.bgQuestion {
+  background: #fff;
+}
+
+.bgOption {
+  background: #f4f4f4 !important;
+}
 
 .question-options {
   list-style: none;
   max-width: 850px;
-  background: #f4f4f4;
+  min-height: 114px;
   display: flex;
   padding: 20px;
   border-radius: 40px;
