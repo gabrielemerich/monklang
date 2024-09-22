@@ -9,6 +9,7 @@
   .completed {
     background-color: #f8af5e;
     width: 50%;
+    transition: width 1s ease-in-out;
   }
 }
 .main-question {
