@@ -1,1 +1,1 @@
-export const configApiUrl = 'https://localhost:7016/';
+export const configApiUrl = 'http://localhost:5104/';

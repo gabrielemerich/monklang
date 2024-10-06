@@ -4,6 +4,7 @@ export interface Question {
   levelId: number;
   answers: Answer[];
   type: QuestionType;
+  id: string;
 }
 
 export interface QuestionViewModel extends Question {
@@ -13,10 +14,12 @@ export interface QuestionViewModel extends Question {
 export interface Answer {
   itsCorrect: boolean;
   description: string;
+  id: string;
 }
 
 export interface AnswerViewModel extends Answer {
   selected: boolean;
+  questionId?: string;
 }
 
 export interface QuestionType {

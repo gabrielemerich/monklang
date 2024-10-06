@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
-import { Question, QuestionType } from './question.model';
-import { QuestionsService } from './questions.service';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Question, QuestionType } from './question.model';
+import { QuestionsService } from './questions.service';
 
 @Component({
   selector: 'ml-questions',
@@ -64,7 +64,7 @@ export class QuestionsComponent implements OnInit {
   }
 
   checkAnswers() {
-    this.questionsService.checkAnswers();
+    this.questionsService.checkAnswers(this.questions[0].id);
   }
 
   private getRandomType(types: QuestionType[]): QuestionType | undefined {

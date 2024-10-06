@@ -1,7 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
-import { QuestionsService } from '../questions.service';
 import { Subscription } from 'rxjs';
 import {
   Answer,
@@ -9,6 +7,7 @@ import {
   Question,
   QuestionViewModel,
 } from '../question.model';
+import { QuestionsService } from '../questions.service';
 
 @Component({
   selector: 'ml-complete-sentence',
@@ -29,17 +28,15 @@ export class CompleteSentenceComponent implements OnInit {
   questionViewModel: QuestionViewModel = {
     answers: [],
     statement: '',
+    id: '',
     title: '',
     levelId: 0,
     type: { id: '', name: '' },
   };
-  selectedAnswers = [];
+  selectedAnswers: any = [];
   loading: boolean = true;
 
-  constructor(
-    private activatedRouter: Router,
-    private questionService: QuestionsService
-  ) {
+  constructor(private questionService: QuestionsService) {
     this.questionService.questionsAction$.subscribe((questions) => {
       if (questions.length > 0) {
         this.questions = questions;
@@ -76,9 +73,12 @@ export class CompleteSentenceComponent implements OnInit {
   }
   ngOnInit(): void {
     this.checkAnswersAction =
-      this.questionService.checkAnswersAction$.subscribe(() => {
-        this.nextQuestion();
-      });
+      this.questionService.checkAnswersAction$.subscribe(
+        (questionId: string) => {
+          //this.nextQuestion();
+          this.checkAnswers(questionId);
+        }
+      );
   }
 
   toggleSelection(answerViewModel: AnswerViewModel) {
@@ -95,19 +95,40 @@ export class CompleteSentenceComponent implements OnInit {
         this.questionViewModel.statement,
         answerViewModel.description
       );
+      this.removeAnswer(answerViewModel.id);
     } else if (selectedOptions.length < correctAnswers.length) {
       answerViewModel.selected = true;
       this.replaceStatementWithAnswer(
         this.questionViewModel.statement,
         answerViewModel.description
       );
+      this.addAnswer(answerViewModel);
     }
+  }
+
+  addAnswer(answerViewModel: AnswerViewModel) {
+    this.selectedAnswers.push(answerViewModel);
+  }
+
+  removeAnswer(answerId: string) {
+    this.selectedAnswers = this.selectedAnswers.filter(
+      (answer: AnswerViewModel) => answer.id != answerId
+    );
+  }
+
+  checkAnswers(questionId: string) {
+    let questionCorrectAnswers = this.questionViewModel.answers.filter(
+      (answer: AnswerViewModel) =>
+        answer.itsCorrect && answer.questionId == questionId
+    );
+    console.log(questionCorrectAnswers);
   }
 
   replaceStatementWithAnswer(statement: string, answer: string) {
     let statementReplace = statement.replace('?', answer);
     this.questionViewModel.statement = statementReplace;
   }
+
   removeAnswerAtStatement(statement: string, answer: string) {
     let statementReplace = statement.replace(answer, '?');
     this.questionViewModel.statement = statementReplace;
