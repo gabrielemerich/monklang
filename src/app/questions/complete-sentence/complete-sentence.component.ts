@@ -33,7 +33,7 @@ export class CompleteSentenceComponent implements OnInit {
     levelId: 0,
     type: { id: '', name: '' },
   };
-  selectedAnswers: any = [];
+  selectedAnswers: AnswerViewModel[] = [];
   loading: boolean = true;
 
   constructor(private questionService: QuestionsService) {
@@ -73,12 +73,10 @@ export class CompleteSentenceComponent implements OnInit {
   }
   ngOnInit(): void {
     this.checkAnswersAction =
-      this.questionService.checkAnswersAction$.subscribe(
-        (questionId: string) => {
-          //this.nextQuestion();
-          this.checkAnswers(questionId);
-        }
-      );
+      this.questionService.checkAnswersAction$.subscribe(() => {
+        console.log('chamo uaqui');
+        this.checkAnswers(this.selectedAnswers);
+      });
   }
 
   toggleSelection(answerViewModel: AnswerViewModel) {
@@ -95,33 +93,64 @@ export class CompleteSentenceComponent implements OnInit {
         this.questionViewModel.statement,
         answerViewModel.description
       );
-      this.removeAnswer(answerViewModel.id);
+      this.removeSelectedAnswer(answerViewModel.id);
     } else if (selectedOptions.length < correctAnswers.length) {
       answerViewModel.selected = true;
       this.replaceStatementWithAnswer(
         this.questionViewModel.statement,
         answerViewModel.description
       );
-      this.addAnswer(answerViewModel);
+      this.addSelectedAnswer(answerViewModel);
     }
   }
 
-  addAnswer(answerViewModel: AnswerViewModel) {
+  addSelectedAnswer(answerViewModel: AnswerViewModel) {
     this.selectedAnswers.push(answerViewModel);
   }
 
-  removeAnswer(answerId: string) {
+  removeSelectedAnswer(answerId: string) {
     this.selectedAnswers = this.selectedAnswers.filter(
       (answer: AnswerViewModel) => answer.id != answerId
     );
   }
 
-  checkAnswers(questionId: string) {
-    let questionCorrectAnswers = this.questionViewModel.answers.filter(
-      (answer: AnswerViewModel) =>
-        answer.itsCorrect && answer.questionId == questionId
+  cleanSelectedAnswers() {
+    this.selectedAnswers = [];
+  }
+
+  checkAnswers(selectedAnswers: AnswerViewModel[]) {
+    if (this.selectedAnswers.length >= 2) {
+      const questionCorrectAnswers = this.questionViewModel.answers.filter(
+        (answer: AnswerViewModel) => answer.itsCorrect
+      );
+      this.checkManyAnswers(questionCorrectAnswers, selectedAnswers);
+    } else {
+      const isCorrectAnswer = selectedAnswers[0]?.itsCorrect;
+      if (isCorrectAnswer) {
+        this.cleanSelectedAnswers();
+        this.nextQuestion();
+      } else {
+        console.log('errou');
+      }
+    }
+  }
+
+  checkManyAnswers(
+    correctAnswers: AnswerViewModel[],
+    selectedAnswers: AnswerViewModel[]
+  ) {
+    const correctAnswersOrdered = correctAnswers.sort(
+      (a, b) => a.position - b.position
     );
-    console.log(questionCorrectAnswers);
+    const isCorrectAnswers =
+      JSON.stringify(correctAnswersOrdered) === JSON.stringify(selectedAnswers);
+    if (isCorrectAnswers) {
+      this.cleanSelectedAnswers();
+      this.nextQuestion();
+      console.log('acertou as 2');
+    } else {
+      console.log('errou as duas');
+    }
   }
 
   replaceStatementWithAnswer(statement: string, answer: string) {

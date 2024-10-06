@@ -64,7 +64,7 @@ export class QuestionsComponent implements OnInit {
   }
 
   checkAnswers() {
-    this.questionsService.checkAnswers(this.questions[0].id);
+    this.questionsService.checkAnswers();
   }
 
   private getRandomType(types: QuestionType[]): QuestionType | undefined {

@@ -14,6 +14,7 @@ export interface QuestionViewModel extends Question {
 export interface Answer {
   itsCorrect: boolean;
   description: string;
+  position: number;
   id: string;
 }
 

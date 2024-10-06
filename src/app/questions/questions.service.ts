@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { configApiUrl } from '../config/api.config';
 import { Question, QuestionType } from './question.model';
@@ -11,7 +11,7 @@ import { Question, QuestionType } from './question.model';
 export class QuestionsService {
   constructor(private http: HttpClient) {}
 
-  private checkAnswersSubject = new BehaviorSubject<string>('');
+  private checkAnswersSubject = new Subject();
   private changeProgressSubject = new BehaviorSubject<[number, number]>([0, 0]);
   private loadingSubject = new BehaviorSubject<boolean>(true);
   private questionsSubject = new BehaviorSubject<Question[]>([]);
@@ -33,8 +33,8 @@ export class QuestionsService {
       .pipe(delay(2000));
   }
 
-  checkAnswers(questionId: string) {
-    this.checkAnswersSubject.next(questionId);
+  checkAnswers() {
+    this.checkAnswersSubject.next();
   }
 
   hideLoading() {
