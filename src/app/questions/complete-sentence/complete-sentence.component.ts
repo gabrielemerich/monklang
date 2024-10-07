@@ -74,7 +74,6 @@ export class CompleteSentenceComponent implements OnInit {
   ngOnInit(): void {
     this.checkAnswersAction =
       this.questionService.checkAnswersAction$.subscribe(() => {
-        console.log('chamo uaqui');
         this.checkAnswers(this.selectedAnswers);
       });
   }
@@ -127,6 +126,7 @@ export class CompleteSentenceComponent implements OnInit {
     } else {
       const isCorrectAnswer = selectedAnswers[0]?.itsCorrect;
       if (isCorrectAnswer) {
+        this.questionService.showAnimate();
         this.cleanSelectedAnswers();
         this.nextQuestion();
       } else {
@@ -145,6 +145,7 @@ export class CompleteSentenceComponent implements OnInit {
     const isCorrectAnswers =
       JSON.stringify(correctAnswersOrdered) === JSON.stringify(selectedAnswers);
     if (isCorrectAnswers) {
+      this.questionService.showAnimate();
       this.cleanSelectedAnswers();
       this.nextQuestion();
       console.log('acertou as 2');

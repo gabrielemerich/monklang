@@ -13,6 +13,13 @@
   background-color: #f8af5e;
   transition: width 1s ease-in-out;
 }
+
+.lottieAnimate {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
 .main-question {
   padding: 20px;
   width: 100%;

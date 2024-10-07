@@ -12,9 +12,11 @@ export class QuestionsService {
   constructor(private http: HttpClient) {}
 
   private checkAnswersSubject = new Subject();
+  private animateSubject = new Subject();
   private changeProgressSubject = new BehaviorSubject<[number, number]>([0, 0]);
   private loadingSubject = new BehaviorSubject<boolean>(true);
   private questionsSubject = new BehaviorSubject<Question[]>([]);
+  animateSubjectAction$ = this.animateSubject.asObservable();
   checkAnswersAction$ = this.checkAnswersSubject.asObservable();
   questionsAction$ = this.questionsSubject.asObservable();
   loading$ = this.loadingSubject.asObservable();
@@ -47,5 +49,9 @@ export class QuestionsService {
 
   setQuestionsState(questions: Question[]) {
     this.questionsSubject.next(questions);
+  }
+
+  showAnimate() {
+    this.animateSubject.next();
   }
 }

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Question, QuestionType } from './question.model';
@@ -17,14 +19,30 @@ export class QuestionsComponent implements OnInit {
   faCheck = faCheckCircle;
   faExit = faDoorOpen;
   loading: boolean = true;
+  showAnimate = false;
   questions: Question[] = [];
   types: QuestionType[] = [];
   randomType: QuestionType | undefined;
+  private animationItem: AnimationItem;
 
   constructor(
     private questionsService: QuestionsService,
     private router: Router
   ) {}
+
+  options: AnimationOptions = {
+    path: '/assets/animations/correctAnswerAnimate.json',
+  };
+
+  styles: Partial<CSSStyleDeclaration> = {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+  };
+
+  animationCreated(animationItem: AnimationItem): void {
+    console.log(animationItem);
+  }
 
   ngOnInit(): void {
     this.router.navigate([`/questions/complete-sentence`]).then(() => {
@@ -55,6 +73,13 @@ export class QuestionsComponent implements OnInit {
           this.changeProgress(totalQuestions, answered);
       }
     );
+
+    this.questionsService.animateSubjectAction$.subscribe(() => {
+      this.showAnimate = true;
+      setTimeout(() => {
+        this.showAnimate = false;
+      }, 1000);
+    });
   }
 
   changeProgress(totalQuestions: number, answered: number) {

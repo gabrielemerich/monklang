@@ -6,6 +6,12 @@
   <div class="progress-bar" [ngClass]="{ shimmer: loading }">
     <div [ngStyle]="{ width: progressBarPercent }" class="completed"></div>
   </div>
+  <div class="lottieAnimate" *ngIf="showAnimate">
+    <ng-lottie
+      [options]="options"
+      (animationCreated)="animationCreated($event)"
+    ></ng-lottie>
+  </div>
   <router-outlet></router-outlet>
   <section class="question-action">
     <button (click)="checkAnswers()">
