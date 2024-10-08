@@ -14,7 +14,7 @@
   </div>
   <router-outlet></router-outlet>
   <section class="question-action">
-    <button (click)="checkAnswers()">
+    <button [disabled]="!checkButtonEnabled" (click)="checkAnswers()">
       Check It
       <fa-icon [icon]="faCheck"></fa-icon>
     </button>

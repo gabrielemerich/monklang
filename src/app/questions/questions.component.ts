@@ -20,6 +20,7 @@ export class QuestionsComponent implements OnInit {
   faExit = faDoorOpen;
   loading: boolean = true;
   showAnimate = false;
+  checkButtonEnabled: boolean = false;
   questions: Question[] = [];
   types: QuestionType[] = [];
   randomType: QuestionType | undefined;
@@ -71,6 +72,12 @@ export class QuestionsComponent implements OnInit {
       ([totalQuestions, answered]) => {
         if (totalQuestions && answered)
           this.changeProgress(totalQuestions, answered);
+      }
+    );
+
+    this.questionsService.enabledCheckButtonAction$.subscribe(
+      (enable: boolean) => {
+        this.checkButtonEnabled = enable;
       }
     );
 

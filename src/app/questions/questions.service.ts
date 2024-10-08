@@ -13,12 +13,14 @@ export class QuestionsService {
 
   private checkAnswersSubject = new Subject();
   private animateSubject = new Subject();
+  private enabledCheckButtonSubject = new BehaviorSubject<boolean>(false);
   private changeProgressSubject = new BehaviorSubject<[number, number]>([0, 0]);
   private loadingSubject = new BehaviorSubject<boolean>(true);
   private questionsSubject = new BehaviorSubject<Question[]>([]);
   animateSubjectAction$ = this.animateSubject.asObservable();
   checkAnswersAction$ = this.checkAnswersSubject.asObservable();
   questionsAction$ = this.questionsSubject.asObservable();
+  enabledCheckButtonAction$ = this.enabledCheckButtonSubject.asObservable();
   loading$ = this.loadingSubject.asObservable();
   changeProgressAction$: Observable<[number, number]> =
     this.changeProgressSubject.asObservable();
@@ -45,6 +47,10 @@ export class QuestionsService {
 
   changeProgress(totalQuestions: number, answered: number) {
     this.changeProgressSubject.next([totalQuestions, answered]);
+  }
+
+  enableCheckButton(enable: boolean) {
+    this.enabledCheckButtonSubject.next(enable);
   }
 
   setQuestionsState(questions: Question[]) {

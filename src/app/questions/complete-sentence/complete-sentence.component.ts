@@ -50,6 +50,7 @@ export class CompleteSentenceComponent implements OnInit {
   }
 
   nextQuestion() {
+    this.questionService.enableCheckButton(false);
     if (this.indexCurrentQuestion < this.questions.length - 1) {
       this.questionViewModel = {
         ...this.questions[this.indexCurrentQuestion + 1],
@@ -101,7 +102,14 @@ export class CompleteSentenceComponent implements OnInit {
       );
       this.addSelectedAnswer(answerViewModel);
     }
+    if (this.selectedAnswers.length == correctAnswers.length) {
+      this.questionService.enableCheckButton(true);
+    } else {
+      this.questionService.enableCheckButton(false);
+    }
   }
+
+  enableCheckButton() {}
 
   addSelectedAnswer(answerViewModel: AnswerViewModel) {
     this.selectedAnswers.push(answerViewModel);
