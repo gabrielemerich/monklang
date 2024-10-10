@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { configApiUrl } from '../config/api.config';
+import { AnimationJsonEnum } from '../shared/animations/animation-json';
 import { Question, QuestionType } from './question.model';
 
 @Injectable({
@@ -12,7 +13,9 @@ export class QuestionsService {
   constructor(private http: HttpClient) {}
 
   private checkAnswersSubject = new Subject();
-  private animateSubject = new Subject();
+  private animateSubject = new BehaviorSubject<AnimationJsonEnum>(
+    AnimationJsonEnum.CorrectAnswer
+  );
   private enabledCheckButtonSubject = new BehaviorSubject<boolean>(false);
   private changeProgressSubject = new BehaviorSubject<[number, number]>([0, 0]);
   private loadingSubject = new BehaviorSubject<boolean>(true);
@@ -57,7 +60,7 @@ export class QuestionsService {
     this.questionsSubject.next(questions);
   }
 
-  showAnimate() {
-    this.animateSubject.next();
+  showAnimate(animateJson: AnimationJsonEnum) {
+    this.animateSubject.next(animateJson);
   }
 }

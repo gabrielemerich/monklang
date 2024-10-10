@@ -10,6 +10,7 @@
     <ng-lottie
       [options]="options"
       (animationCreated)="animationCreated($event)"
+      (complete)="onAnimationComplete()"
     ></ng-lottie>
   </div>
   <router-outlet></router-outlet>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
+import { AnimationJsonEnum } from 'src/app/shared/animations/animation-json';
 import {
   Answer,
   AnswerViewModel,
@@ -134,11 +135,11 @@ export class CompleteSentenceComponent implements OnInit {
     } else {
       const isCorrectAnswer = selectedAnswers[0]?.itsCorrect;
       if (isCorrectAnswer) {
-        this.questionService.showAnimate();
+        this.questionService.showAnimate(AnimationJsonEnum.CorrectAnswer);
         this.cleanSelectedAnswers();
         this.nextQuestion();
       } else {
-        console.log('errou');
+        this.questionService.showAnimate(AnimationJsonEnum.IncorrectAnswer);
       }
     }
   }
@@ -153,12 +154,12 @@ export class CompleteSentenceComponent implements OnInit {
     const isCorrectAnswers =
       JSON.stringify(correctAnswersOrdered) === JSON.stringify(selectedAnswers);
     if (isCorrectAnswers) {
-      this.questionService.showAnimate();
+      this.questionService.showAnimate(AnimationJsonEnum.CorrectAnswer);
       this.cleanSelectedAnswers();
       this.nextQuestion();
       console.log('acertou as 2');
     } else {
-      console.log('errou as duas');
+      this.questionService.showAnimate(AnimationJsonEnum.IncorrectAnswer);
     }
   }
 

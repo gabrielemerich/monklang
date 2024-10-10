@@ -4,7 +4,8 @@ import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { skip, switchMap } from 'rxjs/operators';
+import { AnimationJsonEnum } from '../shared/animations/animation-json';
 import { Question, QuestionType } from './question.model';
 import { QuestionsService } from './questions.service';
 
@@ -33,6 +34,8 @@ export class QuestionsComponent implements OnInit {
 
   options: AnimationOptions = {
     path: '/assets/animations/correctAnswerAnimate.json',
+    autoplay: true,
+    loop: false,
   };
 
   styles: Partial<CSSStyleDeclaration> = {
@@ -41,8 +44,13 @@ export class QuestionsComponent implements OnInit {
     justifyContent: 'center',
   };
 
-  animationCreated(animationItem: AnimationItem): void {
-    console.log(animationItem);
+  animationCreated(animation: AnimationItem): void {
+    this.animationItem = animation;
+  }
+
+  onAnimationComplete(): void {
+    this.showAnimate = false;
+    this.animationItem.destroy();
   }
 
   ngOnInit(): void {
@@ -81,12 +89,16 @@ export class QuestionsComponent implements OnInit {
       }
     );
 
-    this.questionsService.animateSubjectAction$.subscribe(() => {
-      this.showAnimate = true;
-      setTimeout(() => {
-        this.showAnimate = false;
-      }, 1000);
-    });
+    this.questionsService.animateSubjectAction$
+      .pipe(skip(1))
+      .subscribe((animationJsonEnum: AnimationJsonEnum) => {
+        this.options = {
+          ...this.options,
+          path: animationJsonEnum,
+        };
+
+        this.showAnimate = true;
+      });
   }
 
   changeProgress(totalQuestions: number, answered: number) {
