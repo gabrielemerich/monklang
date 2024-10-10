@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
-import { AnimationJsonEnum } from 'src/app/shared/animations/animation-json';
+import { AnimationJsonEnum } from 'src/app/shared/animations/animation-json.enum';
 import {
   Answer,
   AnswerViewModel,

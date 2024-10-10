@@ -5,7 +5,7 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { of } from 'rxjs';
 import { skip, switchMap } from 'rxjs/operators';
-import { AnimationJsonEnum } from '../shared/animations/animation-json';
+import { AnimationJsonEnum } from '../shared/animations/animation-json.enum';
 import { Question, QuestionType } from './question.model';
 import { QuestionsService } from './questions.service';
 

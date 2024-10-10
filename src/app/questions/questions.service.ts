@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { configApiUrl } from '../config/api.config';
-import { AnimationJsonEnum } from '../shared/animations/animation-json';
+import { AnimationJsonEnum } from '../shared/animations/animation-json.enum';
 import { Question, QuestionType } from './question.model';
 
 @Injectable({
