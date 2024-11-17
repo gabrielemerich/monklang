@@ -32,5 +32,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.MONKLANG_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.MONKLANG_AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "us-east-1"
-          SOURCE_DIR: "dist/monklang"
+          AWS_S3_BUCKET: ${{ secrets.MONKLANG_AWS_S3_BUCKET }}
           DEST_DIR: "s3://monklang-front"
