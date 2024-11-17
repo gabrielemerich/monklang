@@ -3,7 +3,7 @@ name: Deploy Angular to S3
 on:
   push:
     branches:
-      - master # Substitua "main" pelo nome da sua branch principal
+      - master
 
 jobs:
   deploy:
@@ -12,6 +12,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.MONKLANG_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.MONKLANG_AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-east-1"
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -25,12 +32,5 @@ jobs:
         run: npm run build --prod
 
       - name: Deploy to S3
-        uses: jakejarvis/s3-sync-action@v0.5.1
-        with:
-          args: --acl public-read --delete
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.MONKLANG_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.MONKLANG_AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: "us-east-1"
-          AWS_S3_BUCKET: ${{ secrets.MONKLANG_AWS_S3_BUCKET }}
-          SOURCE_DIR: "dist/monklang"
+        run: |
+          aws s3 cp dist/monklang/ s3://${{ secrets.MONKLANG_AWS_S3_BUCKET }} --recursive
