@@ -1,0 +1,36 @@
+name: Deploy Angular to S3
+
+on:
+  push:
+    branches:
+      - master # Substitua "main" pelo nome da sua branch principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Angular Application
+        run: npm run build --prod
+
+      - name: Deploy to S3
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --acl public-read --delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.MONKLANG_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.MONKLANG_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-1"
+          SOURCE_DIR: "dist/monklang"
+          DEST_DIR: "s3://monklang-front"
