@@ -24,12 +24,6 @@ jobs:
       - name: Build Angular Application
         run: npm run build --prod
 
-      - name: Debug AWS_S3_BUCKET
-        run: echo "${{ secrets.MONKLANG_AWS_S3_BUCKET }}"
-
-      - name: Debug MONKLANG_AWS_ACCESS_KEY_ID
-        run: echo "${{ secrets.MONKLANG_AWS_ACCESS_KEY_ID }}"
-
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
