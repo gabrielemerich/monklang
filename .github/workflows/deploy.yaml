@@ -25,14 +25,10 @@ jobs:
         run: npm run build --prod
 
       - name: Debug AWS_S3_BUCKET
-        run: echo "Bucket: $MONKLANG_AWS_S3_BUCKET"
-        env:
-          MONKLANG_AWS_S3_BUCKET: ${{ secrets.MONKLANG_AWS_S3_BUCKET }}
+        run: echo "Bucket: ${{ secrets.MONKLANG_AWS_S3_BUCKET }}"
 
       - name: Debug MONKLANG_AWS_ACCESS_KEY_ID
-        run: echo "Bucket: $MONKLANG_AWS_ACCESS_KEY_ID"
-        env:
-          MONKLANG_AWS_ACCESS_KEY_ID: ${{ secrets.MONKLANG_AWS_S3_BUCKET }}
+        run: echo "Bucket: ${{ secrets.MONKLANG_AWS_ACCESS_KEY_ID }}"
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@v0.5.1
