@@ -30,7 +30,7 @@ export class QuestionsService {
 
   getByTypeId(typeId: string) {
     return this.http.get<Question[]>(
-      `${configApiUrl}questions/Types/${typeId}`
+      `${configApiUrl}questions/types/${typeId}`
     );
   }
 
