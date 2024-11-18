@@ -1,1 +1,1 @@
-export const configApiUrl = 'http://localhost:5104/';
+export const configApiUrl = 'https://api-monklang.algartam.tech/';
