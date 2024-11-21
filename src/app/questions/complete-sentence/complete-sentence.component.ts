@@ -110,8 +110,6 @@ export class CompleteSentenceComponent implements OnInit {
     }
   }
 
-  enableCheckButton() {}
-
   addSelectedAnswer(answerViewModel: AnswerViewModel) {
     this.selectedAnswers.push(answerViewModel);
   }
@@ -157,7 +155,6 @@ export class CompleteSentenceComponent implements OnInit {
       this.questionService.showAnimate(AnimationJsonEnum.CorrectAnswer);
       this.cleanSelectedAnswers();
       this.nextQuestion();
-      console.log('acertou as 2');
     } else {
       this.questionService.showAnimate(AnimationJsonEnum.IncorrectAnswer);
     }
@@ -176,6 +173,7 @@ export class CompleteSentenceComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.checkAnswersAction) {
       this.checkAnswersAction.unsubscribe();
+      this.questionService.setQuestionsState([]);
     }
   }
 }

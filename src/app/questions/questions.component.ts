@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCheckCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
-import { of } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { skip, switchMap } from 'rxjs/operators';
 import { AnimationJsonEnum } from '../shared/animations/animation-json.enum';
 import { Question, QuestionType } from './question.model';
@@ -14,8 +14,9 @@ import { QuestionsService } from './questions.service';
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss'],
 })
-export class QuestionsComponent implements OnInit {
+export class QuestionsComponent implements OnInit, OnDestroy {
   @Input() progressBarPercent: string = '0%';
+  private subscriptions: Subscription = new Subscription();
 
   faCheck = faCheckCircle;
   faExit = faDoorOpen;
@@ -76,11 +77,13 @@ export class QuestionsComponent implements OnInit {
         });
     });
 
-    this.questionsService.changeProgressAction$.subscribe(
-      ([totalQuestions, answered]) => {
-        if (totalQuestions && answered)
+    this.subscriptions.add(
+      this.questionsService.changeProgressAction$
+        .pipe(skip(1))
+        .subscribe(([totalQuestions, answered]) => {
+          if (totalQuestions && answered) console.log('io');
           this.changeProgress(totalQuestions, answered);
-      }
+        })
     );
 
     this.questionsService.enabledCheckButtonAction$.subscribe(
@@ -103,7 +106,6 @@ export class QuestionsComponent implements OnInit {
 
   changeProgress(totalQuestions: number, answered: number) {
     let progress = (answered / totalQuestions) * 100;
-    console.log(progress);
     this.progressBarPercent = `${progress.toPrecision(1)}%`;
   }
 
@@ -114,5 +116,9 @@ export class QuestionsComponent implements OnInit {
   private getRandomType(types: QuestionType[]): QuestionType | undefined {
     const randomIndex = Math.floor(Math.random() * types.length);
     return types[randomIndex];
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

@@ -1,1 +1,3 @@
-export const configApiUrl = 'https://api-monklang.algartam.tech/';
+import { environment } from 'src/environments/environment';
+
+export const configApiUrl = environment.apiBaseUrl;
