@@ -36,10 +36,21 @@ header {
 
 @media (max-width: 493px) {
   header {
-    flex-direction: column;
+    margin-bottom: 0;
+    article {
+      display: none;
+    }
+    figure {
+      font-size: 1.5rem;
+    }
+    img {
+      width: 40px;
+    }
+    flex-wrap: nowrap;
     .sentence-title {
-      flex-direction: column;
       text-align: center;
+      margin: 0 auto;
+      padding-left: 40px;
     }
   }
 }

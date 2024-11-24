@@ -1,7 +1,7 @@
 .question-phrase {
   margin: 0 auto;
   padding: 20px;
-  width: 80%;
+  width: 100%;
   text-align: center;
   border-radius: 100px;
   height: 180px;
@@ -44,5 +44,14 @@
   .selected {
     color: #fff;
     background: #103180;
+  }
+}
+
+@media (max-width: 493px) {
+  .question-options {
+    margin-top: 25px;
+  }
+  .question-phrase {
+    height: 140px;
   }
 }
