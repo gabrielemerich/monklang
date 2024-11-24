@@ -41,16 +41,15 @@ header {
       display: none;
     }
     figure {
-      font-size: 1.5rem;
+      font-size: 1.9rem;
     }
     img {
-      width: 40px;
+      width: 45px;
     }
     flex-wrap: nowrap;
     .sentence-title {
       text-align: center;
-      margin: 0 auto;
-      padding-left: 40px;
+      display: contents;
     }
   }
 }
