@@ -21,6 +21,9 @@ header {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    .eua {
+      display: none;
+    }
   }
   article {
     margin-left: 15px;
@@ -48,6 +51,9 @@ header {
     }
     flex-wrap: nowrap;
     .sentence-title {
+      .eua {
+        display: block;
+      }
       text-align: center;
       display: contents;
     }
