@@ -146,9 +146,9 @@ export class CompleteSentenceComponent implements OnInit {
     correctAnswers: AnswerViewModel[],
     selectedAnswers: AnswerViewModel[]
   ) {
-    const correctAnswersOrdered = correctAnswers.sort(
-      (a, b) => a.position - b.position
-    );
+    const correctAnswersOrdered = this.orderAnswersByPosition(correctAnswers);
+    selectedAnswers = this.orderAnswersByPosition(selectedAnswers);
+    
     const isCorrectAnswers =
       JSON.stringify(correctAnswersOrdered) === JSON.stringify(selectedAnswers);
     if (isCorrectAnswers) {
@@ -158,6 +158,12 @@ export class CompleteSentenceComponent implements OnInit {
     } else {
       this.questionService.showAnimate(AnimationJsonEnum.IncorrectAnswer);
     }
+  }
+
+  private orderAnswersByPosition(
+    answers: AnswerViewModel[]
+  ): AnswerViewModel[] {
+    return answers.sort((a, b) => a.position - b.position);
   }
 
   replaceStatementWithAnswer(statement: string, answer: string) {
