@@ -26,3 +26,17 @@ export class HighlightCurlyWordsPipe implements PipeTransform {
     return value.replace(/\{([^\{\}]+)\}/g, '$1');
   }
 }
+
+@Pipe({
+  name: 'highlightSelectedWords',
+  standalone: false
+})
+export class HighlightSelectedWordsPipe implements PipeTransform {
+  transform(value: string): string {
+    if (!value) return '';
+
+    // Remove apenas as chaves, mantendo o conteúdo dentro delas
+    return value.replace(/\{([^\{\}]+)\}/g, '<span class="highlight-question-mark">$1</span>');
+
+  }
+}

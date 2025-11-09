@@ -2,7 +2,7 @@
   <p
     [hidden]="loading"
     [innerHTML]="
-      questionViewModel.statement | highlightAnswers | highlightCurlyWords
+      questionViewModel.statement | highlightAnswers | highlightSelectedWords
     "
   >
     {{ questionViewModel.statement }}
