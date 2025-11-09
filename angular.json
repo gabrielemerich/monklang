@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "monklang:build:production"
+              "buildTarget": "monklang:build:production"
             },
             "development": {
-              "browserTarget": "monklang:build:development"
+              "buildTarget": "monklang:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "monklang:build"
+            "buildTarget": "monklang:build"
           }
         },
         "test": {
