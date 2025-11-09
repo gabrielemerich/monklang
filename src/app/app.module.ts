@@ -7,7 +7,18 @@ import { AppComponent } from './app.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { provideLottieOptions } from 'ngx-lottie';
 
-@NgModule({ declarations: [AppComponent, HomeComponent, CategoriesComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule, AppRoutingModule, SharedModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
-export class AppModule {}
+@NgModule({
+    declarations: [AppComponent, HomeComponent, CategoriesComponent],
+    bootstrap: [AppComponent], 
+    imports: [BrowserModule, AppRoutingModule, SharedModule], 
+    providers: 
+    [
+        provideHttpClient(withInterceptorsFromDi()),
+         provideLottieOptions({
+      player: () => import('lottie-web'),
+    })
+    ]
+})
+export class AppModule { }

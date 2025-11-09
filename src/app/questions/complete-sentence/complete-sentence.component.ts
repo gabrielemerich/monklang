@@ -11,10 +11,10 @@ import {
 import { QuestionsService } from '../questions.service';
 
 @Component({
-    selector: 'ml-complete-sentence',
-    templateUrl: './complete-sentence.component.html',
-    styleUrls: ['./complete-sentence.component.scss'],
-    standalone: false
+  selector: 'ml-complete-sentence',
+  templateUrl: './complete-sentence.component.html',
+  styleUrls: ['./complete-sentence.component.scss'],
+  standalone: false,
 })
 export class CompleteSentenceComponent implements OnInit {
   @Output() progress: EventEmitter<{
@@ -54,11 +54,10 @@ export class CompleteSentenceComponent implements OnInit {
   nextQuestion() {
     this.questionService.enableCheckButton(false);
     if (this.indexCurrentQuestion < this.questions.length - 1) {
+      const nextQuestionIndex = this.indexCurrentQuestion + 1;
       this.questionViewModel = {
-        ...this.questions[this.indexCurrentQuestion + 1],
-        answers: this.mappingAnswers(
-          this.questions[this.indexCurrentQuestion + 1].answers
-        ),
+        ...this.questions[nextQuestionIndex],
+        answers: this.mappingAnswers(this.questions[nextQuestionIndex].answers),
       };
       this.indexCurrentQuestion++;
     }
@@ -162,12 +161,12 @@ export class CompleteSentenceComponent implements OnInit {
   }
 
   replaceStatementWithAnswer(statement: string, answer: string) {
-    let statementReplace = statement.replace('?', answer);
+    let statementReplace = statement.replace('{*}', answer);
     this.questionViewModel.statement = statementReplace;
   }
 
   removeAnswerAtStatement(statement: string, answer: string) {
-    let statementReplace = statement.replace(answer, '?');
+    let statementReplace = statement.replace(answer, '{*}');
     this.questionViewModel.statement = statementReplace;
   }
 

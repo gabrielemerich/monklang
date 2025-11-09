@@ -10,10 +10,10 @@ import { Question, QuestionType } from './question.model';
 import { QuestionsService } from './questions.service';
 
 @Component({
-    selector: 'ml-questions',
-    templateUrl: './questions.component.html',
-    styleUrls: ['./questions.component.scss'],
-    standalone: false
+  selector: 'ml-questions',
+  templateUrl: './questions.component.html',
+  styleUrls: ['./questions.component.scss'],
+  standalone: false,
 })
 export class QuestionsComponent implements OnInit, OnDestroy {
   @Input() progressBarPercent: string = '0%';
@@ -82,8 +82,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
       this.questionsService.changeProgressAction$
         .pipe(skip(1))
         .subscribe(([totalQuestions, answered]) => {
-          if (totalQuestions && answered) console.log('io');
-          this.changeProgress(totalQuestions, answered);
+          if (totalQuestions && answered)
+            this.changeProgress(totalQuestions, answered);
         })
     );
 
