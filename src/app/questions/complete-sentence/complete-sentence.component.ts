@@ -11,9 +11,10 @@ import {
 import { QuestionsService } from '../questions.service';
 
 @Component({
-  selector: 'ml-complete-sentence',
-  templateUrl: './complete-sentence.component.html',
-  styleUrls: ['./complete-sentence.component.scss'],
+    selector: 'ml-complete-sentence',
+    templateUrl: './complete-sentence.component.html',
+    styleUrls: ['./complete-sentence.component.scss'],
+    standalone: false
 })
 export class CompleteSentenceComponent implements OnInit {
   @Output() progress: EventEmitter<{

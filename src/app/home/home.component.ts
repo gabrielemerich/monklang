@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CardLevel } from '../shared/card-level/card-level';
 
 @Component({
-  selector: 'ml-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'ml-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent implements OnInit {
   cardLevellist: CardLevel[] = [];

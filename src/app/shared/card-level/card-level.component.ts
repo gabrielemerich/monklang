@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ml-card-level',
-  templateUrl: './card-level.component.html',
-  styleUrls: ['./card-level.component.scss'],
+    selector: 'ml-card-level',
+    templateUrl: './card-level.component.html',
+    styleUrls: ['./card-level.component.scss'],
+    standalone: false
 })
 export class CardLevelComponent implements OnInit {
   @Input() lvl: string;

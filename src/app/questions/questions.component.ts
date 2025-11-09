@@ -10,9 +10,10 @@ import { Question, QuestionType } from './question.model';
 import { QuestionsService } from './questions.service';
 
 @Component({
-  selector: 'ml-questions',
-  templateUrl: './questions.component.html',
-  styleUrls: ['./questions.component.scss'],
+    selector: 'ml-questions',
+    templateUrl: './questions.component.html',
+    styleUrls: ['./questions.component.scss'],
+    standalone: false
 })
 export class QuestionsComponent implements OnInit, OnDestroy {
   @Input() progressBarPercent: string = '0%';
